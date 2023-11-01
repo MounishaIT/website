@@ -27,19 +27,13 @@ function Reservation() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [submissionMessage, setSubmissionMessage] = useState('');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // Form validation (you can customize this)
     if (!formData.name || !formData.email || !formData.password || !formData.date || !formData.time || !formData.members || !formData.phoneNumber) {
-      setSubmissionMessage('Please fill out all required fields.');
+      alert('Please fill out all required fields.');
       return;
     }
 
@@ -47,7 +41,7 @@ function Reservation() {
     // For demonstration purposes, we'll assume the server always succeeds
     // In a real application, replace this with actual server communication
     setTimeout(() => {
-      setSubmissionMessage('Reserved Successfully');
+      alert('Reserved Successfully');
       // Optionally, reset the form after successful submission
       setFormData(initialFormData);
     }, 1000);
@@ -66,7 +60,7 @@ function Reservation() {
                 type="text"
                 name="name"
                 value={formData.name}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
               />
             </div>
@@ -76,7 +70,7 @@ function Reservation() {
                 type="email"
                 name="email"
                 value={formData.email}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
               />
             </div>
@@ -86,7 +80,7 @@ function Reservation() {
                 type="password"
                 name="password"
                 value={formData.password}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 required
               />
             </div>
@@ -96,7 +90,7 @@ function Reservation() {
                 type="date"
                 name="date"
                 value={formData.date}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                 required
               />
             </div>
@@ -106,7 +100,7 @@ function Reservation() {
                 type="time"
                 name="time"
                 value={formData.time}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, time: e.target.value })}
                 required
               />
             </div>
@@ -116,7 +110,7 @@ function Reservation() {
                 type="number"
                 name="members"
                 value={formData.members}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, members: e.target.value })}
                 required
               />
             </div>
@@ -125,7 +119,7 @@ function Reservation() {
               <select
                 name="preference"
                 value={formData.preference}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, preference: e.target.value })}
               >
                 <option value="Indoor">Indoor</option>
                 <option value="Outdoor">Outdoor</option>
@@ -137,7 +131,7 @@ function Reservation() {
                 type="tel"
                 name="phoneNumber"
                 value={formData.phoneNumber}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
                 required
               />
             </div>
@@ -146,7 +140,7 @@ function Reservation() {
               <select
                 name="specialOccasions"
                 value={formData.specialOccasions}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, specialOccasions: e.target.value })}
               >
                 <option value="">Select</option>
                 <option value="Birthday">Birthday</option>
@@ -159,7 +153,7 @@ function Reservation() {
               <select
                 name="allergies"
                 value={formData.allergies}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, allergies: e.target.value })}
               >
                 <option value="">Select</option>
                 <option value="None">None</option>
@@ -174,14 +168,11 @@ function Reservation() {
               <textarea
                 name="specialRequest"
                 value={formData.specialRequest}
-                onChange={handleChange}
+                onChange={(e) => setFormData({ ...formData, specialRequest: e.target.value })}
               ></textarea>
             </div>
             <button type="submit">Reserve</button>
           </form>
-          {submissionMessage && (
-            <p className="submission-message">{submissionMessage}</p>
-          )}
         </div>
       </div>
     </div>
