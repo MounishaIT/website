@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import 'font-awesome/css/font-awesome.min.css'; 
+import 'font-awesome/css/font-awesome.min.css';
 import { Link } from 'react-router-dom';
 import Loginnav from './Loginnav';
 
@@ -9,35 +9,22 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!username || !password) {
-      alert('Please fill in all fields'); 
+      alert('Please fill in all fields');
       return;
     }
 
-    try {
-      const response = await fetch('https://last-back.onrender.com/coachlog', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('token', data.token);
-   
-        alert('Login Successfully');
-        navigate('/Reservation');
-      } else {
-        alert('Invalid username or password'); 
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('An error occurred during login.'); 
+    if (password === 'mounisha') {
+      // Correct password, perform login action
+      alert('Login Successfully');
+      navigate('/Reservation');
+    } else {
+      // Incorrect password
+      alert('Invalid username or password');
     }
   };
 
@@ -95,75 +82,71 @@ const Login = () => {
     cursor: 'pointer',
   };
 
-  
-
-  
-
   return (
-    <div><Loginnav/>
-    <div style={containerStyle}>
-      <div style={cardStyle}>
-        <div className="col-md-12">
-          <h3 className="card-title text-center">
-            <img
-              src="https://cdn-icons-png.flaticon.com/512/4634/4634838.png"
-              alt="Logo"
-              width="100"
-            />
-          </h3>
-          <form onSubmit={handleLogin} className="login">
-            <div style={inputContainerStyle}>
-              <i className="fa fa-envelope" style={iconStyle}></i>
-              <input
-                type="text"
-                id="username"
-                name="username"
-                style={inputStyle}
-                required
-                placeholder="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+    <div>
+      <Loginnav />
+      <div style={containerStyle}>
+        <div style={cardStyle}>
+          <div className="col-md-12">
+            <h3 className="card-title text-center">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/4634/4634838.png"
+                alt="Logo"
+                width="100"
               />
-            </div>
-            <div style={inputContainerStyle}>
-              <i className="fa fa-lock" style={iconStyle}></i>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                style={inputStyle}
-                required
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <div className="mb-3">
-              <label>
+            </h3>
+            <form onSubmit={handleLogin} className="login">
+              <div style={inputContainerStyle}>
+                <i className="fa fa-envelope" style={iconStyle}></i>
                 <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={() => setRememberMe(!rememberMe)}
-                />{' '}
-                Remember Me
-              </label>
-            </div>
-           
-            <div className="mb-3 text-center">
-              <button style={buttonStyle} type="submit">
-                Login
-              </button>
-            </div>
-            <p className="text-center">
-              Don't have an account? <Link to="/signup">Sign Up</Link>
-            </p>
-          </form>
+                  type="text"
+                  id="username"
+                  name="username"
+                  style={inputStyle}
+                  required
+                  placeholder="username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div style={inputContainerStyle}>
+                <i className="fa fa-lock" style={iconStyle}></i>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  style={inputStyle}
+                  required
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <label>
+                  <input
+                    type="checkbox"
+                    checked={rememberMe}
+                    onChange={() => setRememberMe(!rememberMe)}
+                  />{' '}
+                  Remember Me
+                </label>
+              </div>
+
+              <div className="mb-3 text-center">
+                <button style={buttonStyle} type="submit">
+                  Login
+                </button>
+              </div>
+              <p className="text-center">
+                Don't have an account? <Link to="/signup">Sign Up</Link>
+              </p>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };
 
 export default Login;
-
