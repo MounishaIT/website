@@ -18,7 +18,7 @@ const Login = () => {
     }
 
     try {
-      const response = await fetch('/coachlog', {
+      const response = await fetch('https://last-back.onrender.com/coachlog', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
